@@ -110,7 +110,7 @@ C<_weak_cb> is an alias for C<weak_method_callback_cached> that can also be impo
 
 =head1 SEE ALSO
 
-L<AnyEvent>.
+L<curry>, L<AnyEvent>.
 
 =head1 AUTHOR
 
