@@ -54,18 +54,18 @@ Method::WeakCallback - Call back object methods through weak references.
                         weak_method_callback($obj, 'on_timeout'));
   }
 
-  sub on_timeout { say "Timedout!" }
+  sub on_timeout { say "Time out!" }
 
 
 =head1 DESCRIPTION
 
 When writtin programs mixing event programming with OOP, it is very
-usual to employ callbacks that just call some method on some
+common to employ callbacks that just call some method on some
 object. I.e.:
 
   $w = AE::io($fh, 0, sub { $obj->data_available_for_reading });
 
-Unfortunately, this style can result in the creation of ciclid data
+Unfortunately, this style can result in the creation of cyclic data
 structures that never get freed.
 
 For instance consider the following code:
