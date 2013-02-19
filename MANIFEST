@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Method-WeakCallback.t
+lib/Method/WeakCallback.pm
