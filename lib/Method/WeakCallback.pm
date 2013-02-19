@@ -11,27 +11,45 @@ use Carp;
 
 require Exporter;
 our @ISA = qw(Exporter);
-our @EXPORT_OK = qw(_weak_cb weak_method_callback weak_method_callback_cached);
+our @EXPORT_OK = qw( weak_method_callback weak_method_callback_cached
+                     weak_method_callback_static _weak_cb);
 
 sub weak_method_callback {
     my ($object, $method, @args) = @_;
     croak 'Usage: weak_method_callback($object, $method, @args)'
         unless defined $method;
     weaken $object;
-    sub { $object ? $object->$method(@args, @_) : () };
+    sub { defined($object) ? $object->$method(@args, @_) : () };
 }
 
-fieldhash our %cache;
+fieldhash our %cached;
 sub weak_method_callback_cached {
     my ($object, $method) = @_;
     croak 'Usage: weak_method_callback_cached($object, $method)'
         if @_ > 2 or !defined $method;
 
-    weaken $object;
-    $cache{$object}{$method} ||= sub { $object ? $object->$method(@_) : () };
+    $cached{$object}{$method} ||= do {
+        weaken $object;
+        sub { defined($object) ? $object->$method(@_) : () };
+    };
 }
 
-*_weak_cb = \&weak_method_callback_cached;
+fieldhash our %static;
+sub weak_method_callback_static {
+    my ($object, $method) = @_;
+    croak 'Usage: weak_method_callback_cached($object, $method)'
+        if @_ > 2 or !defined $method;
+
+    $static{$object}{$method} ||= do {
+        weaken $object;
+        my $sub = $object->can($method)
+            or croak "object $object does not have method '$method'";
+        sub { defined($object) ? $sub->($object, @_) : () };
+    };
+}
+
+
+*_weak_cb = \&weak_method_callback_static;
 
 1;
 
