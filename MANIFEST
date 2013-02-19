@@ -3,4 +3,6 @@ Makefile.PL
 MANIFEST
 README
 t/Method-WeakCallback.t
+t/pods.t
 lib/Method/WeakCallback.pm
+bm/bm.pl
