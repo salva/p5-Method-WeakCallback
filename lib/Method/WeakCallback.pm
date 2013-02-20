@@ -1,6 +1,6 @@
 package Method::WeakCallback;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use 5.010;
 use strict;
@@ -12,7 +12,7 @@ use Carp;
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw( weak_method_callback weak_method_callback_cached
-                     weak_method_callback_static _weak_cb);
+                     weak_method_callback_static);
 
 sub weak_method_callback {
     my ($object, $method, @args) = @_;
@@ -47,9 +47,6 @@ sub weak_method_callback_static {
         sub { defined($object) ? $sub->($object, @_) : () };
     };
 }
-
-
-*_weak_cb = \&weak_method_callback_static;
 
 1;
 
@@ -122,9 +119,8 @@ C<weak_method_callback_cached> does not accept extra arguments.
 
 None by default.
 
-The subroutines C<weak_method_callback> and C<weak_method_callback_cached> can be imported from this module.
-
-C<_weak_cb> is an alias for C<weak_method_callback_cached> that can also be imported.
+The subroutines C<weak_method_callback> and
+C<weak_method_callback_cached> can be imported from this module.
 
 =head1 SEE ALSO
 
