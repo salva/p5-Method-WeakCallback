@@ -1,5 +1,8 @@
 Revision history for Perl extension Method::WeakCallback.
 
+0.03  Mar 14, 2013
+        - remove dependency on perl 5.14
+
 0.02  Feb 20, 2013
         - add pointer to module curry
         - implement weak_method_callback_static
