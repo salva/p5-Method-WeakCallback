@@ -88,7 +88,7 @@ For instance consider the following code:
 
 The callback is a closure that internally, keeps a reference to
 C<$obj>. Then a reference to the callback is stored in the watcher
-object which is itself stored in C<$obj> and so, the cicle is
+object which is itself stored in C<$obj> and so, the cycle is
 complete.
 
 Method::WeakCallback solves that problem generating callbacks that use
@@ -132,7 +132,7 @@ Salvador FandiE<ntilde>o, E<lt>sfandino@yahoo.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2013 by Qindel Formacion y Servicios S.L.
+Copyright (C) 2013 by Qindel FormaciE<oacute>n y Servicios S.L.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.14.2 or,
