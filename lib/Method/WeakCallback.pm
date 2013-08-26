@@ -1,6 +1,6 @@
 package Method::WeakCallback;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use strict;
 use warnings;
@@ -36,7 +36,7 @@ sub weak_method_callback_cached {
 fieldhash our %static;
 sub weak_method_callback_static {
     my ($object, $method) = @_;
-    croak 'Usage: weak_method_callback_cached($object, $method)'
+    croak 'Usage: weak_method_callback_static($object, $method)'
         if @_ > 2 or !defined $method;
 
     $static{$object}{$method} ||= do {
@@ -73,7 +73,7 @@ Method::WeakCallback - Call back object methods through weak references.
 
 =head1 DESCRIPTION
 
-When writtin programs mixing event programming with OOP, it is very
+When writing programs mixing event programming with OOP, it is very
 common to employ callbacks that just call some method on some
 object. I.e.:
 
@@ -112,7 +112,8 @@ which stores inside an internal cache the generated callbacks greatly
 improving performance when the same callback (same object, same
 method) is generated over and over.
 
-C<weak_method_callback_cached> does not accept extra arguments.
+Note that C<weak_method_callback_cached> does not accept extra
+arguments.
 
 =head2 EXPORT
 
